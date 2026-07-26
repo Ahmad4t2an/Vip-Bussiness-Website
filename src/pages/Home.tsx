@@ -2,8 +2,13 @@ import { Link } from 'wouter';
 import { motion } from 'framer-motion';
 import { Shield, Award, Star, Settings, ChevronRight } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
-import { categories } from '../data/products';
-import { ProductImagePlaceholder } from '../components/ProductImagePlaceholder';
+import { categories, products } from '../data/products';
+import { ProductImagePlaceholder, FallbackImage } from '../components/ProductImagePlaceholder';
+
+/* Returns the first product image found for a given category, if any */
+function getCategoryImage(categoryId: string): string | undefined {
+  return products.find((p) => p.categoryId === categoryId)?.image;
+}
 import { SEO } from '../components/SEO';
 import logoPath from '@assets/logo.png';
 
@@ -156,8 +161,13 @@ export function Home() {
                   className="group block bg-slate-50 border border-slate-100 rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:border-secondary/30 transition-all duration-300 h-full flex flex-col"
                   data-testid={`link-category-${category.id}`}
                 >
-                  <div className="p-5 flex-grow flex items-center justify-center bg-white border-b border-slate-100 min-h-[120px]">
-                    <ProductImagePlaceholder />
+                  <div className="flex-grow flex items-center justify-center bg-white border-b border-slate-100 min-h-[160px] overflow-hidden p-0">
+                    <FallbackImage
+                      src={getCategoryImage(category.id)}
+                      alt={category.name}
+                      className="w-full h-40 object-cover"
+                      fallback={<ProductImagePlaceholder />}
+                    />
                   </div>
                   <div className="px-4 py-3 flex items-center justify-between bg-primary group-hover:bg-secondary transition-colors duration-300">
                     <h3 className="font-semibold text-sm text-white group-hover:text-primary transition-colors pr-2 leading-snug">{category.name}</h3>
