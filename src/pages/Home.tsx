@@ -188,6 +188,7 @@ export function Home() {
                       src={getCategoryImage(category.id)}
                       alt={category.name}
                       className="w-full h-40 object-cover"
+                      loading="lazy"
                       fallback={<ProductImagePlaceholder />}
                     />
                   </div>

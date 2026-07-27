@@ -42,6 +42,8 @@ export function HeroCarousel({ images, intervalMs = 3500 }: HeroCarouselProps) {
             key={images[index].src}
             src={images[index].src}
             alt={images[index].alt}
+            loading="eager"
+            fetchPriority={index === 0 ? 'high' : 'auto'}
             initial={{ opacity: 0, x: 40, scale: 1.02 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: -40, scale: 0.98 }}
