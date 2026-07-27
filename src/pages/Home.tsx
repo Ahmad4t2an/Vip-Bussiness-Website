@@ -64,14 +64,14 @@ export function Home() {
       <SEO title="Home" description="Premium packaging and printing solutions for businesses across Oman. Reliable. Durable. Quality You Can Trust." />
 
       {/* ── HERO ───────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#ECF6FE] via-[#EFF7FD] to-[#F5F9FD] py-20 lg:py-28">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#ECF6FE] via-[#EFF7FD] to-[#F5F9FD] py-10 md:py-16 lg:py-28">
         <HeroBg />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-8 items-center">
 
-            {/* ── Left: text content ── */}
-            <div className="max-w-3xl mx-auto lg:mx-0 text-center lg:text-left">
+            {/* ── Left: text content (shows below the banner on mobile) ── */}
+            <div className="order-2 lg:order-1 max-w-3xl mx-auto lg:mx-0 text-center lg:text-left">
 
               {/* Logo */}
               <motion.div
@@ -135,16 +135,17 @@ export function Home() {
               </motion.div>
             </div>
 
-            {/* ── Right: auto-scrolling banner ── */}
+            {/* ── Right: auto-scrolling banner (shows first on mobile) ── */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
+              className="order-1 lg:order-2"
             >
               <HeroCarousel
                 images={[
-                  { src: '/images/products/microwave-containers-7.jpg', alt: 'Microwave-Safe Containers' },
-                  { src: '/images/products/cups-lids-9.jpg', alt: 'Premium Cups & Lids' },
+                  { src: '/images/hero/hero-cups.jpg', alt: 'Premium Paper Cups' },
+                  { src: '/images/hero/hero-fries-box.jpg', alt: 'Food Packaging Boxes' },
                   { src: '/images/products/kraft-bowls-3.jpg', alt: 'Eco Kraft Salad Bowls' },
                 ]}
               />
