@@ -24,32 +24,32 @@ interface PageHeroProps {
 }
 
 /**
- * Consistent hero header used across all inner pages (About, Contact, etc.)
- * so heading size, spacing, and layout always match exactly.
+ * Consistent hero used across all inner pages (About, Contact, etc.)
+ * A compact, rounded card — not a full-bleed banner — for a modern look.
  */
 export function PageHero({ eyebrow, title, description }: PageHeroProps) {
   return (
-    <section className="relative overflow-hidden bg-primary py-14 md:py-20 text-center">
-      <HeroPattern />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-6 md:pt-8">
+      <section className="relative overflow-hidden bg-primary rounded-2xl md:rounded-3xl py-10 md:py-14 px-5 text-center shadow-lg">
+        <HeroPattern />
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-2xl mx-auto flex flex-col items-center"
+          transition={{ duration: 0.5 }}
+          className="max-w-xl mx-auto flex flex-col items-center relative z-10"
         >
-          <span className="inline-flex items-center gap-2 bg-white/10 text-secondary text-xs font-semibold tracking-wider uppercase px-4 py-1.5 rounded-full mb-5">
+          <span className="inline-flex items-center gap-2 bg-white/10 text-secondary text-[11px] font-semibold tracking-wider uppercase px-3.5 py-1 rounded-full mb-4">
             {eyebrow}
           </span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-5 leading-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight">
             {title}
           </h1>
-          <div className="w-16 h-1.5 bg-secondary rounded-full mb-6" />
-          <p className="text-slate-300 text-base md:text-lg leading-relaxed">
+          <div className="w-12 h-1 bg-secondary rounded-full mb-4" />
+          <p className="text-slate-300 text-sm md:text-base leading-relaxed">
             {description}
           </p>
         </motion.div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
