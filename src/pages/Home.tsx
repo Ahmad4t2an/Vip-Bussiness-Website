@@ -10,6 +10,7 @@ function getCategoryImage(categoryId: string): string | undefined {
   return products.find((p) => p.categoryId === categoryId)?.image;
 }
 import { SEO } from '../components/SEO';
+import { HeroCarousel } from '../components/HeroCarousel';
 import logoPath from '@assets/logo.png';
 
 const fadeInUp = {
@@ -67,68 +68,88 @@ export function Home() {
         <HeroBg />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
-            {/* Logo */}
+            {/* ── Left: text content ── */}
+            <div className="max-w-3xl mx-auto lg:mx-0 text-center lg:text-left">
+
+              {/* Logo */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.88 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, ease: 'easeOut' }}
+                className="mb-6 inline-block"
+              >
+                <img
+                  src={logoPath}
+                  alt="VIP Logo"
+                  className="h-20 md:h-24 mx-auto lg:mx-0 mix-blend-multiply drop-shadow-lg"
+                />
+              </motion.div>
+
+              {/* Headline */}
+              <motion.h1
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.18 }}
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold text-primary mb-4 leading-tight"
+              >
+                Reliable. Durable.
+                <br />
+                <span className="text-secondary">Quality You Can Trust.</span>
+              </motion.h1>
+
+              {/* Sub */}
+              <motion.p
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.3 }}
+                className="text-base md:text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 font-medium"
+              >
+                Vision International Projects (VIP) delivers premium food packaging, printing, and stationery solutions across Oman and the region.
+              </motion.p>
+
+              {/* CTA Buttons — consistent size */}
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.42 }}
+                className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3"
+              >
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 bg-[#E39100] hover:bg-[#cc8200] text-white font-semibold px-6 py-2.5 rounded-full text-sm shadow-md hover:shadow-lg transition-all duration-200 w-full sm:w-auto"
+                  data-testid="btn-hero-quote"
+                >
+                  Get a Quote <ChevronRight className="w-4 h-4" />
+                </Link>
+                <a
+                  href="https://wa.me/96877444570?text=Hi%2C%20I%20am%20interested%20in%20your%20products"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold px-6 py-2.5 rounded-full text-sm shadow-md hover:shadow-lg transition-all duration-200 w-full sm:w-auto"
+                  data-testid="btn-hero-wa"
+                >
+                  <FaWhatsapp className="w-4 h-4" /> Chat on WhatsApp
+                </a>
+              </motion.div>
+            </div>
+
+            {/* ── Right: auto-scrolling banner ── */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.88 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
-              className="mb-6 inline-block"
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
             >
-              <img
-                src={logoPath}
-                alt="VIP Logo"
-                className="h-20 md:h-24 mx-auto mix-blend-multiply drop-shadow-lg"
+              <HeroCarousel
+                images={[
+                  { src: '/images/products/microwave-containers-7.jpg', alt: 'Microwave-Safe Containers' },
+                  { src: '/images/products/cups-lids-9.jpg', alt: 'Premium Cups & Lids' },
+                  { src: '/images/products/kraft-bowls-3.jpg', alt: 'Eco Kraft Salad Bowls' },
+                ]}
               />
             </motion.div>
 
-            {/* Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.18 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary mb-4 leading-tight"
-            >
-              Reliable. Durable.
-              <br />
-              <span className="text-secondary">Quality You Can Trust.</span>
-            </motion.h1>
-
-            {/* Sub */}
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.3 }}
-              className="text-base md:text-lg text-slate-600 mb-8 max-w-xl mx-auto font-medium"
-            >
-              Vision International Projects (VIP) delivers premium food packaging, printing, and stationery solutions across Oman and the region.
-            </motion.p>
-
-            {/* CTA Buttons — consistent size */}
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.42 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-3"
-            >
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-[#E39100] hover:bg-[#cc8200] text-white font-semibold px-6 py-2.5 rounded-full text-sm shadow-md hover:shadow-lg transition-all duration-200 w-full sm:w-auto"
-                data-testid="btn-hero-quote"
-              >
-                Get a Quote <ChevronRight className="w-4 h-4" />
-              </Link>
-              <a
-                href="https://wa.me/96877444570?text=Hi%2C%20I%20am%20interested%20in%20your%20products"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold px-6 py-2.5 rounded-full text-sm shadow-md hover:shadow-lg transition-all duration-200 w-full sm:w-auto"
-                data-testid="btn-hero-wa"
-              >
-                <FaWhatsapp className="w-4 h-4" /> Chat on WhatsApp
-              </a>
-            </motion.div>
           </div>
         </div>
       </section>
