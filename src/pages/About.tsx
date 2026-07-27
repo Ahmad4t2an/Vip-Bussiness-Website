@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Target, Eye, Building2, FileCheck, Mail, MapPin, ChevronRight, ShieldCheck, Recycle, Factory } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { SEO } from '../components/SEO';
+import { PageHero } from '../components/PageHero';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -14,56 +15,16 @@ const staggerContainer = {
   visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
 };
 
-/* Soft decorative pattern for the hero — echoes the Home hero language */
-function AboutHeroBg() {
-  return (
-    <svg
-      className="absolute inset-0 w-full h-full pointer-events-none select-none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <circle cx="12%" cy="15%" r="120" fill="#E39100" fillOpacity="0.06" />
-      <circle cx="90%" cy="85%" r="160" fill="#E39100" fillOpacity="0.05" />
-      <rect x="82%" y="10%" width="120" height="120" rx="14" fill="none" stroke="#E39100" strokeWidth="1.5" strokeOpacity="0.15" />
-      <rect x="4%" y="70%" width="90" height="90" rx="12" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeOpacity="0.10" />
-      {Array.from({ length: 5 }).map((_, row) =>
-        Array.from({ length: 10 }).map((_, col) => (
-          <circle key={`${row}-${col}`} cx={`${8 + col * 9}%`} cy={`${12 + row * 7}%`} r="1.4" fill="#ffffff" fillOpacity="0.10" />
-        ))
-      )}
-    </svg>
-  );
-}
-
 export function About() {
   return (
-    <div className="pt-20 bg-slate-50 min-h-screen">
+    <div className="pt-16 bg-slate-50 min-h-screen">
       <SEO title="About Us" description="Learn about Vision International Projects, our mission, vision, and commitment to quality packaging across Oman." />
 
-      {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-primary py-16 md:py-24 text-center">
-        <AboutHeroBg />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl mx-auto flex flex-col items-center"
-          >
-            <span className="inline-flex items-center gap-2 bg-white/10 text-secondary text-xs font-semibold tracking-wider uppercase px-4 py-1.5 rounded-full mb-5">
-              About Us
-            </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-5 leading-tight">
-              Vision International Projects
-            </h1>
-            <div className="w-16 h-1.5 bg-secondary rounded-full mb-6" />
-            <p className="text-slate-300 text-base md:text-lg leading-relaxed">
-              A premier supplier of food-grade packaging, paper products, and business printing —
-              built on reliability, durability, and quality you can trust.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="About Us"
+        title="Vision International Projects"
+        description="A premier supplier of food-grade packaging, paper products, and business printing — built on reliability, durability, and quality you can trust."
+      />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
         <div className="max-w-5xl mx-auto">

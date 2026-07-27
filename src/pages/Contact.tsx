@@ -5,6 +5,7 @@ import { MapPin, Mail, Phone, Building2, Send, CheckCircle2 } from 'lucide-react
 import { FaWhatsapp } from 'react-icons/fa';
 import { categories } from '../data/products';
 import { SEO } from '../components/SEO';
+import { PageHero } from '../components/PageHero';
 
 type FormData = {
   name: string;
@@ -54,16 +55,14 @@ export function Contact() {
   };
 
   return (
-    <div className="pt-20 bg-slate-50 min-h-screen">
+    <div className="pt-16 bg-slate-50 min-h-screen">
       <SEO title="Contact Us" description="Get in touch with Vision International Projects for packaging and printing quotes." />
-      
-      {/* Header */}
-      <div className="bg-primary py-12 md:py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">Let's Talk About Your Project</h1>
-          <div className="w-20 h-1.5 bg-secondary rounded-full mx-auto" />
-        </div>
-      </div>
+
+      <PageHero
+        eyebrow="Contact Us"
+        title="Let's Talk About Your Project"
+        description="Tell us what you need and our team will get back to you with a custom quote — usually within one business day."
+      />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-12">
         <div className="grid lg:grid-cols-5 gap-10">
