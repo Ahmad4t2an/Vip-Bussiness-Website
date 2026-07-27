@@ -146,7 +146,7 @@ export function Home() {
                 images={[
                   { src: '/images/hero/hero-cups.jpg', alt: 'Premium Paper Cups' },
                   { src: '/images/hero/hero-fries-box.jpg', alt: 'Food Packaging Boxes' },
-                  { src: '/images/products/kraft-bowls-3.jpg', alt: 'Eco Kraft Salad Bowls' },
+                  { src: '/images/hero/hero-business-cards.jpg', alt: 'Business Cards & Stationery' },
                 ]}
               />
             </motion.div>
