@@ -71,7 +71,7 @@ export function Home() {
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-8 items-center">
 
             {/* ── Left: text content (shows below the banner on mobile) ── */}
-            <div className="order-2 lg:order-1 max-w-3xl mx-auto lg:mx-0 text-center lg:text-left">
+            <div className="max-w-3xl mx-auto lg:mx-0 text-center lg:text-left">
 
               {/* Logo */}
               <motion.div
@@ -135,12 +135,12 @@ export function Home() {
               </motion.div>
             </div>
 
-            {/* ── Right: auto-scrolling banner (shows first on mobile) ── */}
+            {/* ── Right: auto-scrolling banner ── */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="order-1 lg:order-2"
+
             >
               <HeroCarousel
                 images={[
