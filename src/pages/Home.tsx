@@ -1,7 +1,6 @@
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
 import { Shield, Award, Star, Settings, ChevronRight } from 'lucide-react';
-import { FaWhatsapp } from 'react-icons/fa';
 import { categories, products } from '../data/products';
 import { ProductImagePlaceholder, FallbackImage } from '../components/ProductImagePlaceholder';
 
@@ -10,8 +9,6 @@ function getCategoryImage(categoryId: string): string | undefined {
   return products.find((p) => p.categoryId === categoryId)?.image;
 }
 import { SEO } from '../components/SEO';
-import { HeroCarousel } from '../components/HeroCarousel';
-import logoPath from '@assets/logo.png';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -23,133 +20,55 @@ const staggerContainer = {
   visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
 };
 
-/* Packaging SVG decorations for hero */
-function HeroBg() {
-  return (
-    <svg
-      className="absolute inset-0 w-full h-full pointer-events-none select-none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      {/* Large translucent box shape right */}
-      <rect x="72%" y="8%" width="200" height="200" rx="16" fill="none" stroke="#0B1F3D" strokeWidth="1.5" strokeOpacity="0.08" />
-      <rect x="74%" y="11%" width="160" height="160" rx="10" fill="#0B1F3D" fillOpacity="0.03" stroke="#E39100" strokeWidth="1" strokeOpacity="0.12" strokeDasharray="6 4" />
-      {/* Floating small box top-right */}
-      <rect x="85%" y="5%" width="80" height="80" rx="8" fill="none" stroke="#E39100" strokeWidth="1.5" strokeOpacity="0.15" />
-      {/* Circle accent */}
-      <circle cx="80%" cy="80%" r="120" fill="#E39100" fillOpacity="0.04" />
-      <circle cx="15%" cy="90%" r="90" fill="#0B1F3D" fillOpacity="0.04" />
-      {/* Dot grid */}
-      {Array.from({ length: 6 }).map((_, row) =>
-        Array.from({ length: 8 }).map((_, col) => (
-          <circle
-            key={`${row}-${col}`}
-            cx={`${62 + col * 5}%`}
-            cy={`${10 + row * 15}%`}
-            r="1.5"
-            fill="#0B1F3D"
-            fillOpacity="0.06"
-          />
-        ))
-      )}
-      {/* Diagonal stripe accent bottom-left */}
-      <line x1="0%" y1="90%" x2="20%" y2="100%" stroke="#E39100" strokeWidth="60" strokeOpacity="0.04" />
-    </svg>
-  );
-}
-
 export function Home() {
   return (
     <div className="pt-20">
       <SEO title="Home" description="Premium packaging and printing solutions for businesses across Oman. Reliable. Durable. Quality You Can Trust." />
 
       {/* ── HERO ───────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#ECF6FE] via-[#EFF7FD] to-[#F5F9FD] py-10 md:py-16 lg:py-28">
-        <HeroBg />
+      <section className="relative overflow-hidden bg-slate-50 py-6 md:py-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-8 items-center">
-
-            {/* ── Left: text content (shows below the banner on mobile) ── */}
-            <div className="max-w-3xl mx-auto lg:mx-0 text-center lg:text-left">
-
-              {/* Logo */}
+            {/* Paper Products banner */}
+            <Link href="/products?category=paper-products" data-testid="hero-banner-paper">
               <motion.div
-                initial={{ opacity: 0, scale: 0.88 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.7, ease: 'easeOut' }}
-                className="mb-6 inline-block"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="relative rounded-2xl overflow-hidden shadow-lg cursor-pointer group"
               >
-                <img
-                  src={logoPath}
-                  alt="VIP Logo"
-                  className="h-20 md:h-24 mx-auto lg:mx-0 mix-blend-multiply drop-shadow-lg"
-                />
+                <picture>
+                  <source media="(min-width: 768px)" srcSet="/images/hero-banners/paper-desktop.jpg" />
+                  <img
+                    src="/images/hero-banners/paper-mobile.jpg"
+                    alt="Premium Paper Packaging — Eco-friendly cups, bowls, boxes & business printing"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="eager"
+                  />
+                </picture>
               </motion.div>
+            </Link>
 
-              {/* Headline */}
-              <motion.h1
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.18 }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold text-primary mb-4 leading-tight"
-              >
-                Reliable. Durable.
-                <br />
-                <span className="text-secondary">Quality You Can Trust.</span>
-              </motion.h1>
-
-              {/* Sub */}
-              <motion.p
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.3 }}
-                className="text-base md:text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 font-medium"
-              >
-                Vision International Projects (VIP) delivers premium food packaging, printing, and stationery solutions across Oman and the region.
-              </motion.p>
-
-              {/* CTA Buttons — consistent size */}
+            {/* Plastic Products banner */}
+            <Link href="/products?category=plastic-products" data-testid="hero-banner-plastic">
               <motion.div
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.42 }}
-                className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3"
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="relative rounded-2xl overflow-hidden shadow-lg cursor-pointer group"
               >
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-[#E39100] hover:bg-[#cc8200] text-white font-semibold px-6 py-2.5 rounded-full text-sm shadow-md hover:shadow-lg transition-all duration-200 w-full sm:w-auto"
-                  data-testid="btn-hero-quote"
-                >
-                  Get a Quote <ChevronRight className="w-4 h-4" />
-                </Link>
-                <a
-                  href="https://wa.me/96877444570?text=Hi%2C%20I%20am%20interested%20in%20your%20products"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold px-6 py-2.5 rounded-full text-sm shadow-md hover:shadow-lg transition-all duration-200 w-full sm:w-auto"
-                  data-testid="btn-hero-wa"
-                >
-                  <FaWhatsapp className="w-4 h-4" /> Chat on WhatsApp
-                </a>
+                <picture>
+                  <source media="(min-width: 768px)" srcSet="/images/hero-banners/plastic-desktop.jpg" />
+                  <img
+                    src="/images/hero-banners/plastic-mobile.jpg"
+                    alt="Durable Plastic Packaging — Microwave-safe containers, cutlery & tubs"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="eager"
+                  />
+                </picture>
               </motion.div>
-            </div>
-
-            {/* ── Right: auto-scrolling banner ── */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-
-            >
-              <HeroCarousel
-                images={[
-                  { src: '/images/hero/hero-cups.jpg', alt: 'Premium Paper Cups' },
-                  { src: '/images/hero/hero-fries-box.jpg', alt: 'Food Packaging Boxes' },
-                  { src: '/images/hero/hero-business-cards.jpg', alt: 'Business Cards & Stationery' },
-                ]}
-              />
-            </motion.div>
+            </Link>
 
           </div>
         </div>
