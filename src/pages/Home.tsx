@@ -28,10 +28,14 @@ export function Home() {
       {/* ── HERO ───────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-slate-50 py-6 md:py-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 md:gap-6 -mx-4 px-4 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
 
             {/* Paper Products banner */}
-            <Link href="/products?category=paper-products" data-testid="hero-banner-paper">
+            <Link
+              href="/products?category=paper-products"
+              data-testid="hero-banner-paper"
+              className="shrink-0 w-full snap-center"
+            >
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -51,7 +55,11 @@ export function Home() {
             </Link>
 
             {/* Plastic Products banner */}
-            <Link href="/products?category=plastic-products" data-testid="hero-banner-plastic">
+            <Link
+              href="/products?category=plastic-products"
+              data-testid="hero-banner-plastic"
+              className="shrink-0 w-full snap-center"
+            >
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
