@@ -1,6 +1,7 @@
+import { useRef, useState } from 'react';
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
-import { Shield, Award, Star, Settings, ChevronRight } from 'lucide-react';
+import { Shield, Award, Star, Settings, ChevronRight, ChevronLeft } from 'lucide-react';
 import { categories, products } from '../data/products';
 import { ProductImagePlaceholder, FallbackImage } from '../components/ProductImagePlaceholder';
 
@@ -21,6 +22,18 @@ const staggerContainer = {
 };
 
 export function Home() {
+  const heroScrollRef = useRef<HTMLDivElement>(null);
+  const [heroIndex, setHeroIndex] = useState(0);
+  const heroBannerCount = 2;
+
+  const goToHeroSlide = (index: number) => {
+    const container = heroScrollRef.current;
+    if (!container) return;
+    const clamped = Math.max(0, Math.min(heroBannerCount - 1, index));
+    container.scrollTo({ left: clamped * container.clientWidth, behavior: 'smooth' });
+    setHeroIndex(clamped);
+  };
+
   return (
     <div className="pt-20">
       <SEO title="Home" description="Premium packaging and printing solutions for businesses across Oman. Reliable. Durable. Quality You Can Trust." />
@@ -28,7 +41,41 @@ export function Home() {
       {/* ── HERO ───────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-slate-50 py-6 md:py-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 md:gap-6 -mx-4 px-4 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="relative">
+
+            {/* Prev arrow */}
+            <button
+              type="button"
+              onClick={() => goToHeroSlide(heroIndex - 1)}
+              disabled={heroIndex === 0}
+              aria-label="Previous banner"
+              data-testid="btn-hero-prev"
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 md:w-11 md:h-11 rounded-full bg-white/90 hover:bg-white shadow-md flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-opacity"
+            >
+              <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+            </button>
+
+            {/* Next arrow */}
+            <button
+              type="button"
+              onClick={() => goToHeroSlide(heroIndex + 1)}
+              disabled={heroIndex === heroBannerCount - 1}
+              aria-label="Next banner"
+              data-testid="btn-hero-next"
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 md:w-11 md:h-11 rounded-full bg-white/90 hover:bg-white shadow-md flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-opacity"
+            >
+              <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+            </button>
+
+          <div
+            ref={heroScrollRef}
+            onScroll={(e) => {
+              const container = e.currentTarget;
+              const idx = Math.round(container.scrollLeft / container.clientWidth);
+              setHeroIndex(idx);
+            }}
+            className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 md:gap-6 -mx-4 px-4 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          >
 
             {/* Paper Products banner */}
             <Link
@@ -77,6 +124,24 @@ export function Home() {
                 </picture>
               </motion.div>
             </Link>
+
+          </div>
+
+            {/* Dot indicators */}
+            <div className="flex items-center justify-center gap-2 mt-4">
+              {Array.from({ length: heroBannerCount }).map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => goToHeroSlide(i)}
+                  aria-label={`Go to banner ${i + 1}`}
+                  data-testid={`btn-hero-dot-${i}`}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    heroIndex === i ? 'w-6 bg-secondary' : 'w-2 bg-slate-300'
+                  }`}
+                />
+              ))}
+            </div>
 
           </div>
         </div>
